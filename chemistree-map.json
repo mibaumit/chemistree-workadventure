@@ -46,7 +46,7 @@
                 {
                  "name":"openWebsiteTriggerMessage",
                  "type":"string",
-                 "value":"Press \"Enter\" to visit our Website!"
+                 "value":"Press \"SPACE\" to visit our Website!"
                 }],
          "type":"tilelayer",
          "visible":true,
