@@ -77,6 +77,8 @@ WA.room.onEnterLayer('popupZone').subscribe(() => {
 });
 
 WA.room.onLeaveLayer('popupZone').subscribe(() => {
-    if (popUpExplanation !== null) popUpExplanation.close();
+    if (popUpExplanation !== undefined){
+        popUpExplanation.close();
+    }
     WA.ui.removeBubble();
 })
