@@ -6,7 +6,7 @@ import {bootstrapExtra} from "@workadventure/scripting-api-extra";
 bootstrapExtra().catch(e => console.error(e));
 
 var isFirstTimeTuto = false;
-var textFirstPopup = 'Hey! So fängt man eine Diskussion mit jemandem an! Sie können maximal 4 in einer Bubble sein.';
+var textFirstPopup = 'Hey! So fängt man ein Gespräch mit jemandem an! Es können maximal 4 Personen in einem Kreis sein.';
 var textSecondPopup = 'Sie können auch den Chat zur Kommunikation nutzen!';
 var targetObjectTutoBubble ='tutoBubble';
 var targetObjectTutoChat ='tutoChat';
@@ -17,19 +17,19 @@ var popUpExplanation: any = undefined;
 function launchTuto (){
     WA.ui.openPopup(targetObjectTutoBubble, textFirstPopup, [
         {
-            label: "Next",
+            label: "Weiter",
             className: "normal",
             callback: (popup) => {
                 popup.close();
 
                 WA.ui.openPopup(targetObjectTutoChat, textSecondPopup, [
                     {
-                        label: "Open Chat",
+                        label: "Chat öffnen",
                         className: "normal",
                         callback: (popup1) => {
-                            WA.chat.sendChatMessage("Hallo zusammen!", 'WA Chemistree Guide');
+                            WA.chat.sendChatMessage("Hallo, willkommen bei der CHEMISTREE Geburtstagsfeier!", 'Chemistree Guide');
                             popup1.close();
-                            WA.ui.openPopup("tutoFinal","Sie sind startklar! Geh durch das Tor, um das Chemistree Team zu treffen und die Funktionen zu entdecken!",[
+                            WA.ui.openPopup("tutoFinal","Sie sind startklar! Gehen Sie hinein, um das Chemistree Team zu treffen und die Funktionen zu entdecken!",[
                                 {
                                     label: "Super!",
                                     className : "success",callback:(popup2 => {
@@ -58,14 +58,14 @@ WA.room.onEnterLayer('popupZone').subscribe(() => {
     else {
         popUpExplanation = WA.ui.openPopup(targetObjectTutoExplanation, 'Möchten Sie das Tutorial wiederholen?', [
             {
-                label: "No",
+                label: "Nein",
                 className: "error",
                 callback: (popup) => {
                     popup.close();
                 }
             },
             {
-                label: "Yes",
+                label: "Ja",
                 className: "success",
                 callback: (popup) => {
                     popup.close();
