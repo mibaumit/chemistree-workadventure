@@ -56,7 +56,7 @@ WA.room.onEnterLayer('popupZone').subscribe(() => {
         launchTuto();
     }
     else {
-        popUpExplanation = WA.ui.openPopup(targetObjectTutoExplanation, 'Do you want to review the explanation?', [
+        popUpExplanation = WA.ui.openPopup(targetObjectTutoExplanation, 'Möchten Sie das Tutorial wiederholen?', [
             {
                 label: "No",
                 className: "error",
