@@ -27,7 +27,7 @@ function launchTuto (){
                         label: "Open Chat",
                         className: "normal",
                         callback: (popup1) => {
-                            WA.chat.sendChatMessage("Hey you can talk here too!", 'WA Chemistree Guide');
+                            WA.chat.sendChatMessage("Hallo zusammen!", 'WA Chemistree Guide');
                             popup1.close();
                             WA.ui.openPopup("tutoFinal","Sie sind startklar! Geh durch das Tor, um das Chemistree Team zu treffen und die Funktionen zu entdecken!",[
                                 {
