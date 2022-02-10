@@ -6,9 +6,9 @@ import {bootstrapExtra} from "@workadventure/scripting-api-extra";
 bootstrapExtra().catch(e => console.error(e));
 
 var isFirstTimeTuto = false;
-var textFirstPopup = 'Hey ! This is how to start a discussion with someone ! You can be 4 max in a bubble.';
-var textSecondPopup = 'You can also use the chat to communicate ! ';
-var targetObjectTutoBubble ='Tutobubble';
+var textFirstPopup = 'Hey! So fängt man eine Diskussion mit jemandem an! Sie können maximal 4 in einer Bubble sein.';
+var textSecondPopup = 'Sie können auch den Chat zur Kommunikation nutzen!';
+var targetObjectTutoBubble ='tutoBubble';
 var targetObjectTutoChat ='tutoChat';
 var targetObjectTutoExplanation ='tutoExplanation';
 var popUpExplanation: any = undefined;
@@ -27,11 +27,11 @@ function launchTuto (){
                         label: "Open Chat",
                         className: "normal",
                         callback: (popup1) => {
-                            WA.chat.sendChatMessage("Hey you can talk here too!", 'WA Guide');
+                            WA.chat.sendChatMessage("Hey you can talk here too!", 'WA Chemistree Guide');
                             popup1.close();
-                            WA.ui.openPopup("TutoFinal","You are good to go! Go through the gate to meet the dev team and discover the features !",[
+                            WA.ui.openPopup("tutoFinal","Sie sind startklar! Geh durch das Tor, um das Chemistree Team zu treffen und die Funktionen zu entdecken!",[
                                 {
-                                    label: "Got it!",
+                                    label: "Super!",
                                     className : "success",callback:(popup2 => {
                                         popup2.close();
                                         WA.controls.restorePlayerControls();
