@@ -6,15 +6,15 @@ import {bootstrapExtra} from "@workadventure/scripting-api-extra";
 bootstrapExtra().catch(e => console.error(e));
 
 var isFirstTimeTuto = false;
-var textFirstPopup = 'Hey! So fängt man ein Gespräch mit jemandem an! Es können maximal 4 Personen in einem Kreis sein.';
-var textSecondPopup = 'Sie können auch den Chat zur Kommunikation nutzen!';
-var targetObjectTutoBubble ='tutoBubble';
-var targetObjectTutoChat ='tutoChat';
-var targetObjectTutoExplanation ='tutoExplanation';
+var textFirstPopup = 'Herzlich willkommen im virtuellen CHEMISTREE Büro. Ich erkläre Ihnen, wie es funktioniert.';
+var textSecondPopup = 'Wenn Sie sich in der Nähe einer Person befinden, öffnet sich innerhalb eines Kreises ein Videoraum. Darin können max. 4 Personen gleichzeitig sein.';
+var textThirdPopup = 'In unseren Büroräumen (z. B. ROSMARIE) können sich auch mehr als 4 Personen treffen.';
+var targetObjectTutoBubble = 'tutoBubble';
+var targetObjectTutoExplanation = 'tutoExplanation';
 var popUpExplanation: any = undefined;
 
 
-function launchTuto (){
+function launchTuto() {
     WA.ui.openPopup(targetObjectTutoBubble, textFirstPopup, [
         {
             label: "Weiter",
@@ -22,25 +22,35 @@ function launchTuto (){
             callback: (popup) => {
                 popup.close();
 
-                WA.ui.openPopup(targetObjectTutoChat, textSecondPopup, [
+                WA.ui.openPopup(targetObjectTutoBubble, textSecondPopup, [
                     {
-                        label: "Chat öffnen",
+                        label: "Weiter",
                         className: "normal",
                         callback: (popup1) => {
-                            WA.chat.sendChatMessage("Hallo, willkommen bei der CHEMISTREE Geburtstagsfeier!", 'Chemistree Guide');
                             popup1.close();
-                            WA.ui.openPopup("tutoFinal","Sie sind startklar! Gehen Sie hinein, um das Chemistree Team zu treffen und die Funktionen zu entdecken!",[
+
+                            WA.ui.openPopup(targetObjectTutoBubble, textThirdPopup, [
                                 {
-                                    label: "Super!",
-                                    className : "success",callback:(popup2 => {
+                                    label: "Weiter",
+                                    className: "normal",
+                                    callback: (popup2) => {
                                         popup2.close();
-                                        WA.controls.restorePlayerControls();
-                                    })
+
+                                        WA.ui.openPopup("tutoFinal", "Viel Spaß in unserem Büro. Wir freuen uns auf den Austausch mit Ihnen.", [
+                                            {
+                                                label: "Super!",
+                                                className: "success", callback: (popup3 => {
+                                                    popup3.close();
+                                                    WA.controls.restorePlayerControls();
+                                                })
+                                            }
+                                        ])
+                                    }
                                 }
+
                             ])
                         }
                     }
-
                 ])
             }
         }
@@ -54,8 +64,7 @@ WA.room.onEnterLayer('popupZone').subscribe(() => {
     if (!isFirstTimeTuto) {
         isFirstTimeTuto = true;
         launchTuto();
-    }
-    else {
+    } else {
         popUpExplanation = WA.ui.openPopup(targetObjectTutoExplanation, 'Möchten Sie das Tutorial wiederholen?', [
             {
                 label: "Nein",
@@ -77,7 +86,7 @@ WA.room.onEnterLayer('popupZone').subscribe(() => {
 });
 
 WA.room.onLeaveLayer('popupZone').subscribe(() => {
-    if (popUpExplanation !== undefined){
+    if (popUpExplanation !== undefined) {
         popUpExplanation.close();
     }
     WA.ui.removeBubble();
